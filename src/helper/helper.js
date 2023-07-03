@@ -16,19 +16,22 @@ export function earnPoints_Number(result, answers, point) {
 
 //Returns boolean whether Passed or Failed
 export function flagResult(totalPoints, earnPoints) {
-    return (totalPoints * 50 / 100) < earnPoints; // earn 50% marks 
+    return (totalPoints * 50 / 100) < earnPoints; // earn 50% marks
 }
 
-// Check user auth  
+// Check user auth
 export function CheckUserExist({ children }) {
     const auth = useSelector(state => state.result.userId)
     return auth ? children : <Navigate to={'/'} replace={true}></Navigate>
 }
 
-// Get server data 
-export async function getServerData(url, callback) {
-    const data = await (await axios.get(url))?.data;
-    return callback ? callback(data) : data;
+// Get server data
+export async function getServerData(url) {
+    let response = await fetch(url, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    return data;
 }
 
 // Post server data */

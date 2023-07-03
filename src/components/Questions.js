@@ -16,7 +16,7 @@ export default function Questions({ onChecked }) {
   useEffect(() => {
       dispatch(updateResult({ trace, checked }))
   }, [checked])
-    
+
   function onSelect(i) {
       onChecked(i)
       setChecked(i)
@@ -29,12 +29,12 @@ export default function Questions({ onChecked }) {
   return (
     <div className='questions'>
       <h2 className='text-light'>{questions?.question}</h2>
-      
+
       <ul key={questions?.id}>
-        { 
+        {
           questions?.options.map((q, i) => (
             <li key={i}>
-              <input 
+              <input
                 type="radio"
                 value={false}
                 name="options"
@@ -45,7 +45,7 @@ export default function Questions({ onChecked }) {
               <div className={`check${result[trace] == i ? 'checked' : ''}`}></div>
             </li>
           ))
-        } 
+        }
       </ul>
     </div>
   )

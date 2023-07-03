@@ -4,7 +4,20 @@ import { getServerData } from '../helper/helper'
 
 export default function ResultTable() {
 
-  const [data, setData] = useState([])  
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    //Fetch results
+    async function fetchData() {
+      try {
+        let res = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`);
+        setData(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData();
+  });
 
   return (
     <div>
@@ -17,7 +30,7 @@ export default function ResultTable() {
             <td>Result</td>
           </tr>
         </thead>
-        
+
         <tbody>
           { !data ?? <div>No Data Found </div>}
           {
